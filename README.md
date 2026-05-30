@@ -1,43 +1,45 @@
+> [Читати українською](README.uk.md)
+
 # 🖋️ Modern Blog 2026 (Capstone Project)
 
-Сучасна Full-Stack платформа для ведення блогу, побудована на **Next.js 15**.
-Цей проєкт є глибокою модернізацією Capstone-завдання з курсу "The Complete Web Development Bootcamp",
-адаптованою під професійні стандарти розробки 2026 року.
+A modern Full-Stack blogging platform built with **Next.js 15**.
+This project is a deep modernization of the Capstone assignment from "The Complete Web Development Bootcamp" course, adapted to professional development standards of 2026.
 
-## 🛠 Технологічний стек
+## 🛠 Tech Stack
 - **Framework:** [Next.js 15](https://nextjs.org/) (App Router, Server Actions)
-- **Мова:** [TypeScript](https://www.typescriptlang.org/) (Сувора типізація)
-- **Стилізація:** [Tailwind CSS v4](https://tailwindcss.com/) + [Lucide Icons](https://lucide.dev/)
-- **Валідація:** [Zod](https://zod.dev/) (Валідація схем на рівні рантайму)
-- **Архітектура:** MVC (Model-View-Controller)
-- **Зберігання даних:** Local JSON Persistence (Локальна файлова система)
+- **Language:** [TypeScript](https://www.typescriptlang.org/) (Strict mode)
+- **Styling:** [Tailwind CSS v4](https://tailwindcss.com/) + [Lucide Icons](https://lucide.dev/)
+- **Validation:** [Zod](https://zod.dev/) (Runtime schema validation)
+- **Architecture:** MVC (Model-View-Controller)
+- **Data Storage:** Local JSON Persistence (File system)
 
-## 🚀 Функціональні можливості
-- [x] **Create:** Створення постів через сучасні Server Actions із миттєвим оновленням UI.
-- [x] **Read:** Динамічний рендеринг списку постів та окремих сторінок для читання.
-- [x] **Update:** Повноцінне редагування існуючих записів із автозаповненням форм.
-- [x] **Delete:** Видалення публікацій у реальному часі.
-- [x] **UX/UI:** Адаптивний дизайн, Glassmorphism ефекти, обробка станів завантаження (Pending states) та валідація помилок "на льоту".
-
----
-
-## ⚠️ Важливо: Поточний статус (MVP)
-Проєкт перебуває у стадії **Minimum Viable Product**. Для цілей навчання та демонстрації логіки було прийнято кілька архітектурних компромісів:
-
-1. **Ефемерність даних:** Оскільки дані зберігаються у файлі `posts.json`, при деплої на Vercel вони є тимчасовими. Після перезавантаження серверної функції (Serverless) або нового деплою, список постів повертається до початкового стану.
-2. **Відсутність Auth:** На даному етапі доступ до редагування та видалення відкритий для всіх користувачів (демонстраційний режим).
-3. **Технічний борг:** Використання файлової системи замість повноцінної БД було обрано для фокусу на вивченні Server Actions та MVC в межах навчального курсу.
-
-## 🗺 Roadmap (Плани на майбутнє)
-- [ ] **Data Persistence:** Міграція з JSON-файлу на **PostgreSQL** або **MongoDB** за допомогою **Prisma ORM**.
-- [ ] **Автентифікація:** Впровадження **NextAuth.js** для захисту авторських постів.
-- [ ] **Media Storage:** Додавання можливості завантаження обкладинок для постів через **Cloudinary**.
-- [ ] **Dark Mode:** Повноцінна підтримка темної теми.
+## 🚀 Features
+- [x] **Create:** Create posts via modern Server Actions with instant UI updates.
+- [x] **Read:** Dynamic rendering of the post feed and individual post pages.
+- [x] **Update:** Full editing of existing posts with form pre-population.
+- [x] **Delete:** Delete posts with real-time UI refresh.
+- [x] **UX/UI:** Responsive design, Glassmorphism effects, pending states and inline error validation.
 
 ---
 
-## 📦 Як запустити проєкт локально
-1. git clone https://github.com/yushkonazar/modern-blog.git
+## ⚠️ Current Status (MVP)
+The project is at the **Minimum Viable Product** stage. Several architectural trade-offs were made for learning and demonstration purposes:
+
+1. **Ephemeral data:** Posts are stored in `posts.json`, so on Vercel deployments data is temporary. After a serverless function restart or a new deploy, the post list resets to its initial state.
+2. **No authentication:** Edit and delete operations are open to all users at this stage (demo mode).
+3. **Technical debt:** File-based storage was chosen over a real database to focus on learning Server Actions and MVC within the course scope.
+
+## 🗺 Roadmap
+- [ ] **Data Persistence:** Migrate from JSON file to **PostgreSQL** or **MongoDB** using **Prisma ORM**.
+- [ ] **Authentication:** Implement **NextAuth.js** to protect authored posts.
+- [ ] **Media Storage:** Add post cover image uploads via **Cloudinary**.
+- [ ] **Dark Mode:** Full dark theme support.
+
+---
+
+## 📦 Getting Started
+
+1. `git clone https://github.com/yushkonazar/modern-blog.git`
 2. `npm install`
 3. `npm run dev`
-4. Відкрий http://localhost:3000
+4. Open http://localhost:3000
