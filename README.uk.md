@@ -6,6 +6,14 @@
 Цей проєкт є глибокою модернізацією Capstone-завдання з курсу "The Complete Web Development Bootcamp",
 адаптованою під професійні стандарти розробки 2026 року.
 
+## 🔗 Live Demo
+
+[modern-blog-5k8a.onrender.com](https://modern-blog-5k8a.onrender.com/)
+
+> Безкоштовний хостинг — перший запит може займати до 30 секунд через "засинання" сервера.
+
+<img width="1897" height="856" alt="image" src="https://github.com/user-attachments/assets/8b24f457-0c3b-4fa7-980c-0e165d17f3c3" />
+
 ## 🛠 Технологічний стек
 - **Framework:** [Next.js 15](https://nextjs.org/) (App Router, Server Actions)
 - **Мова:** [TypeScript](https://www.typescriptlang.org/) (Сувора типізація)
