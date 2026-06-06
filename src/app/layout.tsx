@@ -7,6 +7,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import NavAuth from "@/components/NavAuth";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://modern-blog-5k8a.onrender.com"),
   title: "Modern Blog — Next.js 15 + TypeScript",
   description: "Full-stack blog built with Next.js 15, TypeScript, Server Actions and Tailwind.",
   icons: {
