@@ -1,8 +1,8 @@
-// src/app/posts/[id]/page.tsx
 import { storage } from "@/lib/storage";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, Calendar, User } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, User } from "lucide-react";
+import { formatDate, readingTime } from "@/lib/postUtils";
 
 interface PostPageProps {
   params: Promise<{ id: string }>;
@@ -18,8 +18,8 @@ export default async function PostDetailPage({ params }: PostPageProps) {
 
   return (
     <main className="max-w-2xl mx-auto py-16 px-4">
-      <Link 
-        href="/" 
+      <Link
+        href="/"
         className="flex items-center gap-2 text-slate-500 hover:text-blue-600 transition-colors mb-8 group"
       >
         <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
@@ -34,11 +34,15 @@ export default async function PostDetailPage({ params }: PostPageProps) {
         <div className="flex items-center gap-6 text-sm text-slate-500 mb-10 pb-6 border-b">
           <div className="flex items-center gap-1">
             <Calendar size={14} />
-            {post.createdAt}
+            {formatDate(post.createdAt)}
           </div>
           <div className="flex items-center gap-1">
             <User size={14} />
             {post.author || "Анонім"}
+          </div>
+          <div className="flex items-center gap-1">
+            <Clock size={14} />
+            {readingTime(post.content)}
           </div>
         </div>
 

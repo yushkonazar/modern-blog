@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Trash2, Clock, ArrowRight, Pencil } from "lucide-react";
 import { deletePostAction } from "@/actions/postActions";
 import { Post } from "@/models/Post";
+import { formatDate, readingTime } from "@/lib/postUtils";
 
 export default function PostCard({ post, currentUserId }: { post: Post; currentUserId: string | null }) {
     const deleteWithId = deletePostAction.bind(null, post.id!);
@@ -14,7 +15,7 @@ export default function PostCard({ post, currentUserId }: { post: Post; currentU
                     <div className="space-y-1">
                         <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-blue-600">
                             <span className="rounded-full bg-blue-50 px-2 py-0.5">Нове</span>
-                            <span className="text-slate-400">• {post.createdAt?.split(',')[0]}</span>
+                            <span className="text-slate-400">• {formatDate(post.createdAt)}</span>
                         </div>
                         <Link href={`/posts/${post.id}`}>
                             <h3 className="text-2xl font-bold leading-tight text-slate-800 group-hover:text-blue-600 transition-colors">
@@ -44,7 +45,7 @@ export default function PostCard({ post, currentUserId }: { post: Post; currentU
                 <div className="flex items-center justify-between border-t border-slate-50 pt-4">
                     <div className="flex items-center gap-4 text-xs text-slate-400 font-medium">
                         <div className="flex items-center gap-1.5">
-                            <Clock size={14} /> 3 хв читання
+                            <Clock size={14} /> {readingTime(post.content)}
                         </div>
                     </div>
                     <Link href={`/posts/${post.id}`} className="flex items-center gap-1 text-sm font-bold text-blue-600">

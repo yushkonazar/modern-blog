@@ -51,7 +51,7 @@ export async function createPostAction(prevState: FormState, formData: FormData)
     id: uuidv4(),
     authorId: userId,
     author: authorName,
-    createdAt: new Date().toLocaleString("uk-UA"),
+    createdAt: new Date().toISOString(),
   });
 
   await storage.saveAll(allPosts);
