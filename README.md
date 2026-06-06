@@ -5,6 +5,14 @@
 A modern Full-Stack blogging platform built with **Next.js 15**.
 This project is a deep modernization of the Capstone assignment from "The Complete Web Development Bootcamp" course, adapted to professional development standards of 2026.
 
+## 🔗 Live Demo
+
+[modern-blog-5k8a.onrender.com](https://modern-blog-5k8a.onrender.com/)
+
+> Free hosting — the first request may take up to 30 seconds due to server spin-up after inactivity.
+
+<img width="1897" height="856" alt="image" src="https://github.com/user-attachments/assets/8b24f457-0c3b-4fa7-980c-0e165d17f3c3" />
+
 ## 🛠 Tech Stack
 - **Framework:** [Next.js 15](https://nextjs.org/) (App Router, Server Actions)
 - **Language:** [TypeScript](https://www.typescriptlang.org/) (Strict mode)
