@@ -2,7 +2,7 @@ import { storage } from "@/lib/storage";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Calendar, Clock, User } from "lucide-react";
-import { formatDate, readingTime } from "@/lib/postUtils";
+import { formatDateTime, readingTime } from "@/lib/postUtils";
 
 interface PostPageProps {
   params: Promise<{ id: string }>;
@@ -34,7 +34,7 @@ export default async function PostDetailPage({ params }: PostPageProps) {
         <div className="flex items-center gap-6 text-sm text-slate-500 mb-10 pb-6 border-b">
           <div className="flex items-center gap-1">
             <Calendar size={14} />
-            {formatDate(post.createdAt)}
+            {formatDateTime(post.createdAt)}
           </div>
           <div className="flex items-center gap-1">
             <User size={14} />
