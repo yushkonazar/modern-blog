@@ -4,7 +4,7 @@ import { Inter } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import { ClerkProvider } from "@clerk/nextjs";
-import NavAuth from "@/components/NavAuth";
+import NavAuthWrapper from "@/components/NavAuthWrapper";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://modern-blog-5k8a.onrender.com"),
@@ -36,7 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <span className="text-xl font-black tracking-tighter uppercase">Modern<span className="text-blue-600">Blog</span></span>
               </Link>
 
-              <NavAuth />
+              <NavAuthWrapper />
             </div>
           </nav>
 

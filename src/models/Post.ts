@@ -1,7 +1,8 @@
 import { z } from "zod";
 
 export const PostSchema = z.object({
-  id: z.string().uuid().optional(),
+  id:       z.string().uuid().optional(),
+  authorId: z.string().optional(),
   title: z
     .string()
     .trim()
@@ -12,7 +13,7 @@ export const PostSchema = z.object({
     .trim()
     .min(10, "Контент має бути мінімум 10 символів")
     .max(10_000, "Контент не може перевищувати 10 000 символів"),
-  author: z.string().trim().max(50).default("Анонім"),
+  author:    z.string().trim().max(50).default("Анонім"),
   createdAt: z.string().optional(),
 });
 

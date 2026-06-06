@@ -3,8 +3,9 @@ import { Trash2, Clock, ArrowRight, Pencil } from "lucide-react";
 import { deletePostAction } from "@/actions/postActions";
 import { Post } from "@/models/Post";
 
-export default function PostCard({ post, isAuthenticated }: { post: Post; isAuthenticated: boolean }) {
+export default function PostCard({ post, currentUserId }: { post: Post; currentUserId: string | null }) {
     const deleteWithId = deletePostAction.bind(null, post.id!);
+    const isOwner = !!currentUserId && post.authorId === currentUserId;
 
     return (
         <div className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:border-blue-300 hover:shadow-xl hover:shadow-blue-500/10">
@@ -22,7 +23,7 @@ export default function PostCard({ post, isAuthenticated }: { post: Post; isAuth
                         </Link>
                     </div>
 
-                    {isAuthenticated && (
+                    {isOwner && (
                       <div className="flex items-center gap-2">
                         <Link href={`/posts/${post.id}/edit`} className="p-2 text-slate-300 hover:text-blue-500">
                           <Pencil size={18} />

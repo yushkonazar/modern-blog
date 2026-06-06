@@ -6,7 +6,6 @@ import { PenTool } from "lucide-react";
 
 export default async function HomePage() {
   const { userId } = await auth();
-  const isAuthenticated = !!userId;
   const posts = await storage.getAll();
   const reversedPosts = [...posts].reverse(); // Копіюємо і розгортаємо
 
@@ -25,7 +24,7 @@ export default async function HomePage() {
         {/* Форма - Sidebar на десктопі */}
         <aside className="lg:col-span-1">
           <div className="sticky top-28">
-            {isAuthenticated ? (
+            {userId ? (
               <CreatePostForm />
             ) : (
               <div className="bg-white p-6 rounded-xl border shadow-sm mb-12 text-center space-y-3">
@@ -48,11 +47,13 @@ export default async function HomePage() {
                 <PenTool size={32} />
               </div>
               <h3 className="text-lg font-bold text-slate-800">Тут поки порожньо</h3>
-              <p className="text-slate-500">Будь першим, хто напише щось круте!</p>
+              <p className="text-slate-500">
+                {userId ? "Будь першим, хто напише щось круте!" : "Записів ще немає"}
+              </p>
             </div>
           ) : (
             reversedPosts.map((post) => (
-              <PostCard key={post.id} post={post} isAuthenticated={isAuthenticated} />
+              <PostCard key={post.id} post={post} currentUserId={userId ?? null} />
             ))
           )}
         </section>

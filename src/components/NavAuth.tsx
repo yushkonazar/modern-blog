@@ -3,8 +3,10 @@
 import { useAuth, useClerk, UserButton } from "@clerk/nextjs";
 
 export default function NavAuth() {
-  const { isSignedIn } = useAuth();
+  const { isSignedIn, isLoaded } = useAuth();
   const { openSignIn } = useClerk();
+
+  if (!isLoaded) return <div className="w-20 h-8" />;
 
   if (isSignedIn) {
     return <UserButton />;
