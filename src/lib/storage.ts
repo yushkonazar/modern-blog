@@ -10,6 +10,9 @@ export const storage = {
             const data = await fs.readFile(FILE_PATH, "utf-8");
             return JSON.parse(data);
         } catch (error) {
+            if ((error as NodeJS.ErrnoException).code !== "ENOENT") {
+                console.error("[storage] Failed to read posts.json:", error);
+            }
             return [];
         }
     }, 

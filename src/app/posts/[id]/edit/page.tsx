@@ -1,6 +1,11 @@
+import type { Metadata } from "next";
 import { storage } from "@/lib/storage";
 import { notFound } from "next/navigation";
 import EditPostForm from "@/components/EditPostForm";
+
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+};
 
 export default async function EditPostPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;

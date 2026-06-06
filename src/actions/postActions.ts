@@ -4,6 +4,9 @@ import { revalidatePath } from "next/cache";
 import { storage } from "@/lib/storage";
 import { PostSchema } from "@/models/Post";
 import { v4 as uuidv4 } from "uuid";
+import { z } from "zod";
+
+const uuidSchema = z.string().uuid();
 
 export type FormState = {
   errors?: {
@@ -19,8 +22,8 @@ export type FormState = {
 };
 
 export async function createPostAction(prevState: FormState, formData: FormData): Promise<FormState> {
-const title = formData.get("title") as string;
-  const content = formData.get("content") as string;
+  const title = (formData.get("title") as string).trim();
+  const content = (formData.get("content") as string).trim();
   const validated = PostSchema.safeParse({ title, content });
 
   if (!validated.success) {
@@ -47,8 +50,9 @@ const title = formData.get("title") as string;
 }
 
 export async function deletePostAction(id: string) {
-    const allPosts = await storage.getAll();
+    if (!uuidSchema.safeParse(id).success) return;
 
+    const allPosts = await storage.getAll();
     const filteredPosts = allPosts.filter((post) => post.id !== id);
 
     await storage.saveAll(filteredPosts);
@@ -57,8 +61,12 @@ export async function deletePostAction(id: string) {
 }
 
 export async function updatePostAction(id: string, prevState: FormState, formData: FormData): Promise<FormState> {
-  const title = formData.get("title") as string;
-  const content = formData.get("content") as string;
+  if (!uuidSchema.safeParse(id).success) {
+    return { success: false, message: "Невірний ідентифікатор" };
+  }
+
+  const title = (formData.get("title") as string).trim();
+  const content = (formData.get("content") as string).trim();
 
   const validated = PostSchema.safeParse({ title, content });
 
