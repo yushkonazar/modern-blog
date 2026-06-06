@@ -1,9 +1,12 @@
+import { auth } from "@clerk/nextjs/server";
 import { storage } from "@/lib/storage";
 import PostCard from "@/components/PostCard";
 import CreatePostForm from "@/components/CreatePostForm";
 import { PenTool } from "lucide-react";
 
 export default async function HomePage() {
+  const { userId } = await auth();
+  const isAuthenticated = !!userId;
   const posts = await storage.getAll();
   const reversedPosts = [...posts].reverse(); // Копіюємо і розгортаємо
 
@@ -22,7 +25,13 @@ export default async function HomePage() {
         {/* Форма - Sidebar на десктопі */}
         <aside className="lg:col-span-1">
           <div className="sticky top-28">
-            <CreatePostForm />
+            {isAuthenticated ? (
+              <CreatePostForm />
+            ) : (
+              <div className="bg-white p-6 rounded-xl border shadow-sm mb-12 text-center space-y-3">
+                <p className="text-slate-600 text-sm">Увійдіть, щоб публікувати записи</p>
+              </div>
+            )}
           </div>
         </aside>
 
@@ -43,7 +52,7 @@ export default async function HomePage() {
             </div>
           ) : (
             reversedPosts.map((post) => (
-              <PostCard key={post.id} post={post} />
+              <PostCard key={post.id} post={post} isAuthenticated={isAuthenticated} />
             ))
           )}
         </section>

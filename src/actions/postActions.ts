@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { auth } from "@clerk/nextjs/server";
 import { storage } from "@/lib/storage";
 import { PostSchema } from "@/models/Post";
 import { v4 as uuidv4 } from "uuid";
@@ -22,6 +23,9 @@ export type FormState = {
 };
 
 export async function createPostAction(prevState: FormState, formData: FormData): Promise<FormState> {
+  const { userId } = await auth();
+  if (!userId) return { success: false, message: "Необхідно увійти в систему" };
+
   const title = (formData.get("title") as string).trim();
   const content = (formData.get("content") as string).trim();
   const validated = PostSchema.safeParse({ title, content });
@@ -50,6 +54,9 @@ export async function createPostAction(prevState: FormState, formData: FormData)
 }
 
 export async function deletePostAction(id: string) {
+    const { userId } = await auth();
+    if (!userId) return;
+
     if (!uuidSchema.safeParse(id).success) return;
 
     const allPosts = await storage.getAll();
@@ -61,6 +68,9 @@ export async function deletePostAction(id: string) {
 }
 
 export async function updatePostAction(id: string, prevState: FormState, formData: FormData): Promise<FormState> {
+  const { userId } = await auth();
+  if (!userId) return { success: false, message: "Необхідно увійти в систему" };
+
   if (!uuidSchema.safeParse(id).success) {
     return { success: false, message: "Невірний ідентифікатор" };
   }

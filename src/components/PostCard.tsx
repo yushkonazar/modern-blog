@@ -3,7 +3,7 @@ import { Trash2, Clock, ArrowRight, Pencil } from "lucide-react";
 import { deletePostAction } from "@/actions/postActions";
 import { Post } from "@/models/Post";
 
-export default function PostCard({ post }: { post: Post }) {
+export default function PostCard({ post, isAuthenticated }: { post: Post; isAuthenticated: boolean }) {
     const deleteWithId = deletePostAction.bind(null, post.id!);
 
     return (
@@ -22,17 +22,18 @@ export default function PostCard({ post }: { post: Post }) {
                         </Link>
                     </div>
 
-                    <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-blue-600">
-                    <Link href={`/posts/${post.id}/edit`} className="p-2 text-slate-300 hover:text-blue-500">
-                        <Pencil size={18} />
-                    </Link>
-
-                    <form action={deleteWithId}>
-                        <button className="rounded-full p-2 text-slate-300 transition-colors hover:bg-red-50 hover:text-red-500">
+                    {isAuthenticated && (
+                      <div className="flex items-center gap-2">
+                        <Link href={`/posts/${post.id}/edit`} className="p-2 text-slate-300 hover:text-blue-500">
+                          <Pencil size={18} />
+                        </Link>
+                        <form action={deleteWithId}>
+                          <button className="rounded-full p-2 text-slate-300 transition-colors hover:bg-red-50 hover:text-red-500">
                             <Trash2 size={18} />
-                        </button>
-                    </form>
-                    </div>
+                          </button>
+                        </form>
+                      </div>
+                    )}
                 </div>
 
                 <p className="line-clamp-2 text-slate-600 leading-relaxed">

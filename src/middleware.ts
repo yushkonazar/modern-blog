@@ -1,43 +1,44 @@
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
 
-// In-memory store (works for single-instance Render deployment)
+const isProtectedRoute = createRouteMatcher(["/posts/(.*)/edit"]);
+
+// In-memory rate limiter for Server Actions
 const ipStore = new Map<string, { count: number; resetAt: number }>();
+const LIMIT = 15;
+const WINDOW = 60_000;
 
-const LIMIT = 15;       // max Server Action calls per window
-const WINDOW = 60_000;  // 1 minute
+function checkRateLimit(request: NextRequest): NextResponse | null {
+  if (request.method !== "POST" || !request.headers.get("next-action")) return null;
 
-function getIp(request: NextRequest): string {
-  return (
-    request.headers.get("x-forwarded-for")?.split(",")[0].trim() ?? "unknown"
-  );
-}
-
-export function middleware(request: NextRequest) {
-  // Only rate-limit Server Action calls (Next.js sends POST with Next-Action header)
-  if (request.method !== "POST" || !request.headers.get("next-action")) {
-    return NextResponse.next();
-  }
-
-  const ip = getIp(request);
+  const ip =
+    request.headers.get("x-forwarded-for")?.split(",")[0].trim() ?? "unknown";
   const now = Date.now();
   const entry = ipStore.get(ip);
 
   if (!entry || now > entry.resetAt) {
     ipStore.set(ip, { count: 1, resetAt: now + WINDOW });
-    return NextResponse.next();
+    return null;
   }
 
   entry.count++;
-
   if (entry.count > LIMIT) {
     return NextResponse.json(
       { error: "Занадто багато запитів. Зачекайте хвилину." },
       { status: 429 }
     );
   }
-
-  return NextResponse.next();
+  return null;
 }
+
+export default clerkMiddleware(async (auth, request) => {
+  const rateLimitResponse = checkRateLimit(request);
+  if (rateLimitResponse) return rateLimitResponse;
+
+  if (isProtectedRoute(request)) {
+    await auth.protect();
+  }
+});
 
 export const config = {
   matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],

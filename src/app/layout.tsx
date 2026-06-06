@@ -1,12 +1,17 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Image from "next/image";
 import Link from "next/link";
-import { PenTool } from "lucide-react";
+import { ClerkProvider } from "@clerk/nextjs";
+import NavAuth from "@/components/NavAuth";
 
 export const metadata: Metadata = {
   title: "Modern Blog — Next.js 15 + TypeScript",
   description: "Full-stack blog built with Next.js 15, TypeScript, Server Actions and Tailwind.",
+  icons: {
+    icon: "/icon.svg",
+  },
   openGraph: {
     title: "Modern Blog",
     description: "Full-stack blog: Next.js 15, TypeScript, Server Actions.",
@@ -20,25 +25,27 @@ const inter = Inter({ subsets: ["latin", "cyrillic"] });
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="uk">
-      <body className={`${inter.className} bg-[#f8fafc] text-slate-900`}>
-        <nav className="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/80 backdrop-blur-md">
-          <div className="flex h-16 items-center px-6">
-            <Link href="/" className="flex items-center gap-2 transition-opacity hover:opacity-80">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 text-white">
-                <PenTool size={22} />
-              </div>
-              <span className="text-xl font-black tracking-tighter uppercase">Modern<span className="text-blue-600">Blog</span></span>
-            </Link>
-          </div>
-        </nav>
+    <ClerkProvider>
+      <html lang="uk">
+        <body className={`${inter.className} bg-[#f8fafc] text-slate-900`}>
+          <nav className="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/80 backdrop-blur-md">
+            <div className="flex h-16 items-center justify-between px-6">
+              <Link href="/" className="flex items-center transition-opacity hover:opacity-80">
+                <Image src="/icon.svg" alt="Modern Blog logo" width={40} height={40} />
+                <span className="text-xl font-black tracking-tighter uppercase">Modern<span className="text-blue-600">Blog</span></span>
+              </Link>
 
-        {children}
+              <NavAuth />
+            </div>
+          </nav>
 
-        <footer className="mt-20 border-t border-slate-200 py-10 text-center text-sm text-slate-400">
-          © 2026 Modern Blog Capstone. Побудовано з Next.js та ❤️
-        </footer>
-      </body>
-    </html>
+          {children}
+
+          <footer className="mt-20 border-t border-slate-200 py-10 text-center text-sm text-slate-400">
+            © 2026 Modern Blog Capstone. Побудовано з Next.js та ❤️
+          </footer>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
