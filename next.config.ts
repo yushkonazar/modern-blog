@@ -7,9 +7,11 @@ const ContentSecurityPolicy = [
   `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
   "style-src 'self' 'unsafe-inline'",
   "font-src 'self'",
-  "img-src 'self' data: blob:",
-  "connect-src 'self'",
+  "img-src 'self' data: blob: https://img.clerk.com",
+  "connect-src 'self' https://*.clerk.accounts.dev wss://*.clerk.accounts.dev https://*.clerk.com",
+  "frame-src 'self' https://*.clerk.accounts.dev https://accounts.clerk.com",
   "frame-ancestors 'none'",
+  "worker-src 'self' blob:",
 ].join("; ");
 
 const securityHeaders = [
