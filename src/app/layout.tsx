@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     title: "Modern Blog",
     description: "Full-stack blog: Next.js 15, TypeScript, Server Actions.",
     url: "https://modern-blog-5k8a.onrender.com/",
-    images: [{ url: "/og.png", width: 1200, height: 630 }],
+    images: [{ url: "", width: 1200, height: 630 }],
     type: "website",
   },
 };
@@ -43,7 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
 
           <footer className="mt-20 border-t border-slate-200 py-10 text-center text-sm text-slate-400">
-            © 2026 Modern Blog Capstone. Побудовано з Next.js та ❤️
+            © 2026 Modern Blog. Built by <a href="https://github.com/yushkonazar">Nazar Yushko</a> with Next.js and ❤️
           </footer>
         </body>
       </html>
