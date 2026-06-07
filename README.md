@@ -11,7 +11,7 @@ This project is a deep modernization of the Capstone assignment from "The Comple
 
 > Free hosting — the first request may take up to 30 seconds due to server spin-up after inactivity.
 
-<img width="1897" height="856" alt="image" src="https://github.com/user-attachments/assets/8b24f457-0c3b-4fa7-980c-0e165d17f3c3" />
+<img width="1896" height="863" alt="og" src="https://github.com/user-attachments/assets/114714f8-0fc8-49cc-a79d-6a9a48975824" />
 
 ## 🛠 Tech Stack
 - **Framework:** [Next.js 15](https://nextjs.org/) (App Router, Server Actions)
