@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     title: "Modern Blog",
     description: "Full-stack blog: Next.js 15, TypeScript, Server Actions.",
     url: "https://modern-blog-5k8a.onrender.com/",
-    images: [{ url: "", width: 1200, height: 630 }],
+    images: [{ url: "/og.png", width: 1200, height: 630 }],
     type: "website",
   },
 };
