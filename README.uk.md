@@ -8,7 +8,7 @@
 
 ## 🔗 Live Demo
 
-[modern-blog-5k8a.onrender.com](https://modern-blog-5k8a.onrender.com/)
+<img width="1896" height="863" alt="og" src="https://github.com/user-attachments/assets/d4e2c587-8572-456e-8f3b-8ddb38d927c0" />
 
 > Безкоштовний хостинг — перший запит може займати до 30 секунд через "засинання" сервера.
 
