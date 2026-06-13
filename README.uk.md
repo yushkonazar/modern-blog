@@ -1,10 +1,8 @@
 > [Read in English](README.md)
 
-# 🖋️ Modern Blog 2026 (Capstone Project)
+# 🖋️ Modern Blog 2026
 
 Сучасна Full-Stack платформа для ведення блогу, побудована на **Next.js 15**.
-Цей проєкт є глибокою модернізацією Capstone-завдання з курсу "The Complete Web Development Bootcamp",
-адаптованою під професійні стандарти розробки 2026 року.
 
 ## 🔗 Live Demo
 
